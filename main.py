@@ -12,7 +12,7 @@ def analyze_child_eye_health(image_data_list: list[bytes], child_age: str, child
 
  Args:
    image_data_list: A list of base64 decoded bytes for 1 to 6 images.
-   child_age: The age of the child as a string (e.g., "Seven").
+   child_age: The age of the child as a string .
    child_gender: The gender of the child as a string (e.g., "Boy").
    mime_types: A list of MIME types for each image in image_data_list (e.g., ["image/jpeg", "image/png"]).
 
@@ -339,7 +339,7 @@ uploaded_files = st.file_uploader(
    accept_multiple_files=True
 )
 
-child_age = st.text_input("Child's Age (e.g., 'Seven')")
+child_age = st.text_input("Child's Age")
 child_gender = st.selectbox("Child's Gender", ["Male", "Female", "Other", "Prefer not to say"])
 
 if st.button("Analyze Eye Health"):
