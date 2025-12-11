@@ -26,7 +26,7 @@ def analyze_child_eye_health(image_data_list: list[bytes], child_age: str, child
      raise ValueError("The number of image data objects and MIME types must match.")
 
  # Initialize Gemini client
- api_key = st.secrets["OPENAI_API_KEY"]
+ api_key = st.secrets["API_KEY"]
      
  client = genai.Client(
      vertexai=True,
