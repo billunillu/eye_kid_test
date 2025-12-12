@@ -248,27 +248,33 @@ ONLY Return a JSON with {
  },
  "Category_1_Eyelid_Position_and_Appearance": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Classification based on photos."
+   "description": "Classification based on photos.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Category_2_Ocular_Alignment_and_Position": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Whether eyes appear straight, symmetric light reflex, head posture."
+   "description": "Whether eyes appear straight, symmetric light reflex, head posture.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Category_3_Conjunctiva_and_Sclera": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Redness, discoloration, discharge."
+   "description": "Redness, discoloration, discharge.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Category_4_Pupil_Characteristics": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Pupil size similarity, shape."
+   "description": "Pupil size similarity, shape.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Category_5_Expression_and_Facial_Observations": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Squinting, photophobia, asymmetry."
+   "description": "Squinting, photophobia, asymmetry.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Category_6_Cornea_and_Periorbital_Skin": {
    "allowed_values": ["normal", "possibly_concerning", "not_assessable"],
-   "description": "Corneal clarity, periorbital skin issues."
+   "description": "Corneal clarity, periorbital skin issues.",
+   "Confidence Score": "How confident are you in the analysis. Rate from a scale of 1 to 100"
  },
  "Concerning_Signs_Summary": {
    "allowed_values": "free text",
