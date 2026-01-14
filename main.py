@@ -7,8 +7,7 @@ from google.genai import types
 # Your analyze_child_eye_health function (modified to accept MIME types)
 def analyze_child_eye_health(image_data_list: list[bytes], child_age: str, child_gender: str, mime_types: list[str]):
 
- #api_key = st.secrets["API_KEY"]
- api_key = st.secrets["API_KEY"]
+ api_key = st.secrets["API_KEY"] 
  store_name = 'fileSearchStores/eyeknowledge-tfe13blubv8d'
    
  client = genai.Client(
@@ -35,22 +34,18 @@ def analyze_child_eye_health(image_data_list: list[bytes], child_age: str, child
     ], system_instruction=[types.Part.from_text(text=prompt)]) # <--- This is now correctly placed))
  
  response_text = ""
- for chunk in client.models.generate_content_stream(
-   model = 'gemini-3-pro-preview',
-   contents = contents,
-   config = generate_content_config,
-   ):
-   if not chunk.candidates or not chunk.candidates[0].content or not chunk.candidates[0].content.parts:
-       continue
-   response_text += chunk.text
-   token = response.usage_metadata.total_token_count
+
+ response = client.models.generate_content(model="gemini-3-flash-preview",
+                                           contents=image_parts + [types.Part.from_text(text=f"""Age is 8, male""")],
+                                           config=generate_content_config)
+ response_text = response.text
+ token = response.usage_metadata.total_token_count
  return response_text,token
 
 # --- Streamlit App ---
 st.set_page_config(page_title="Pediatric Eye Health Assistant")
 
-st.title("👁️ Pediatric Eye Health Assistant")
-st.write("Upload 1 to 6 photos of a child's face/eyes, provide their age and gender, and get an AI-powered preliminary assessment.")
+st.title("EYE SCAN ")
 
 uploaded_files = st.file_uploader(
    "Upload Image(s) (1 to 6 files, PNG or JPEG)",
@@ -84,26 +79,16 @@ if st.button("Analyze Eye Health"):
                    analysis_json = json.loads(analysis_result_str)
                    st.subheader("Analysis Results:")
                    st.json(analysis_json)
-                   st.subheader("token use")
-                   st.write(analysis_result_token)
-
-                   st.subheader("cost estimate")
-                   st.write(.15/1000000*analysis_result_token)
                    
                except json.JSONDecodeError:
                    st.subheader("Raw Analysis Output (not valid JSON):")
                    st.write(analysis_result_str)
-
+               st.subheader("token use")
+               st.write(analysis_result_token)
+               st.subheader("cost estimate")
+               st.write(.15/1000000*analysis_result_token)
            except Exception as e:
                st.error(f"An error occurred during analysis: {e}")
                st.error("Please ensure your GOOGLE_CLOUD_API_KEY is correctly set and the images are valid.")
 
 st.markdown("---")
-st.markdown(
-   """
-   **Disclaimer:** This assistant provides preliminary observations based on uploaded photos and
-   should *never* be used as a substitute for professional medical advice or diagnosis.
-   Always consult with a licensed eye-care professional for any health concerns.
-   """
-)
-
